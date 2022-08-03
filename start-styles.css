@@ -1,0 +1,59 @@
+body{
+    background-color: #4F6367;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: 'Merriweather', sans-serif;
+}
+p{
+    color: #B8D8D8;
+}
+.title-boz{
+    display: flex;
+}
+#title-text{
+    font-weight: bolder;
+    font-size: 6em;
+}
+#guess-text{
+    margin-top: 0;
+    text-align: center;
+    font-size: large;
+}
+.guess-box{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2em;
+}
+b{
+    color: #4F6367;
+    font-size: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-bottom: 3px solid  #B8D8D8;
+    padding-right:  .6em;
+    padding-left: .6em;
+}
+.keyboard{
+    width: 100%;
+    margin: 2em 2em 2em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.keyboard-row{
+    display: flex;
+}
+.keyboard-row button{
+
+    text-align: center;
+    font-size: 3em;
+    width: 3vw;
+    height: 3vw;
+    margin: .25em .25em .25em .25em;
+    background-color: black;
+    color: #B8D8D8;
+    border-radius: 10%;
+}
