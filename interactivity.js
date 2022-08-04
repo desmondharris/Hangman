@@ -1,6 +1,6 @@
 //ALL WORDS MUST BE IN ALL UPPERCASE
 // Only in place now for a simple test word
-let currentWord = "ВАВАЛ";
+let currentWord = "солнышко";
 let lettersFound = 0;
 let keys = document.querySelectorAll('button');
 let guessBox = document.querySelector('.guess-box');
@@ -11,14 +11,21 @@ nextButton.textContent = 'Next';
 nextButton.style.cssText = 'background-color: black; color: #B8D8D8; border-radius: 10%;';
 nextButton.addEventListener('click', moveOn);
 insertBlanks();
+addKeyFctns();
+
+let guessCount = Math.floor(currentWord.length * 1.5) + 1;
+let guessCntTxt = document.querySelector('#title-text');
+guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
 
 // Create a function for each key that checks to see if that key's letter
 // is in the word and if so, put it onscreen
-for(let i=0; i<keys.length; i++){
-    keys[i].addEventListener('click', function(){
-        console.log(keys[i].textContent);
-        return typeKey(keys[i].textContent);
-    });
+function addKeyFctns(){
+    for(let i=0; i<keys.length; i++){
+        keys[i].onclick = (function(){
+            return typeKey(keys[i].textContent);
+        })
+        keys[i].style.color = '#B8D8D8';
+    }
 }
 
 function getKey(letter){
@@ -32,6 +39,8 @@ function getKey(letter){
 function typeKey(letter){
     // All the <b> tags that contain blank letters
     let blanks = document.querySelectorAll('b');
+    getKey(letter).style.color = 'black';
+    getKey(letter).onclick = null;
     if(currentWord.toUpperCase().includes(letter)){
         // Find where the queried letter is in the word
         // And insert those letters
@@ -45,6 +54,9 @@ function typeKey(letter){
         if(lettersFound === currentWord.length){
             finishWord();
         }
+    } else{
+        guessCount--;
+        guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
     }
 }
 
@@ -52,7 +64,7 @@ function typeKey(letter){
 function findOccurences(letter, str){
     let indices = [];
     for(let i=0; i < str.length; i++){
-        if(str[i] === letter){
+        if(str[i].toUpperCase() === letter){
             indices.push(i);
         }
     }
@@ -76,7 +88,24 @@ function finishWord(){
     guessBox.appendChild(nextButton);
 }
 
+function nextWord(current){
+    switch(current){
+        case 'солнышко':
+            currentWord = 'любовь';
+            break;
+        case 'любовь':
+            finalScreen();
+            break;
+    }
+}
 function moveOn(){
     lettersFound = 0;
+    addKeyFctns();
+    nextWord(currentWord);
     insertBlanks();
+    guessCount = Math.floor(currentWord.length * 1.5) + 1;
+    guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
+}
+function finalScreen(){
+    console.log('Done!');
 }
