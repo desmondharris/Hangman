@@ -16,6 +16,7 @@ addKeyFctns();
 let guessCount = Math.floor(currentWord.length * 1.5) + 1;
 let guessCntTxt = document.querySelector('#title-text');
 guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
+let hinted = false;
 
 // Create a function for each key that checks to see if that key's letter
 // is in the word and if so, put it onscreen
@@ -36,7 +37,6 @@ function getKey(letter){
     }
 }
 
-//Maybe add hint functionality?
 function typeKey(letter){
     // All the <b> tags that contain blank letters
     let blanks = document.querySelectorAll('b');
@@ -61,7 +61,7 @@ function typeKey(letter){
         if(guessCount === 0){
             failedWord()
         }
-        if(guessCount <= 12){
+        if(guessCount <= 4){
             displayHint();
         }
     }
@@ -95,6 +95,9 @@ function insertBlanks(){
 }
 
 function displayHint(){
+    if(hinted){
+        return undefined;
+    }
     let hintText;
     switch(currentWord){
         case 'солнышко':
@@ -122,12 +125,15 @@ function displayHint(){
     hintP.style.cssText = "color: #B8D8D8; font-size: large; margin-top: 0;";
     hintP.classList.add("hint");
     titleBox.appendChild(hintP);
+    hinted = true;
 }
 
 function finishWord(){
-    titleBox = document.querySelector('.title-box');
-    hint = document.querySelector('.hint');
-    titleBox.removeChild(hint);
+    if(hinted){
+        titleBox = document.querySelector('.title-box');
+        hint = document.querySelector('.hint');
+        titleBox.removeChild(hint);
+    }
     guessBox.innerHTML = "<b> Congrats! Move on to the next word?</b>";
     innerWords = document.querySelector('b');
     innerWords.style.color = "#B8D8D8";
@@ -145,7 +151,7 @@ function nextWord(current){
             break;
         case 'милашка':
             guessCount = 10;
-            currentWord = 'уют';;
+            currentWord = 'уют';
             break;
         case 'уют':
             guessCount = 10;
@@ -155,18 +161,39 @@ function nextWord(current){
             currentWord = 'кошка';
             break;
         case 'кошка':
-            finalScreen();
+            currentWord = 'done';
+            break;
     }
 }
 
 function moveOn(){
     lettersFound = 0;
-    guessCount = Math.floor(currentWord.length * 1.5) + 1;
+    hinted = false;
     addKeyFctns();
     nextWord(currentWord);
+    if(currentWord === 'done'){
+        finalScreen();
+        return null;
+    }
+    guessCount = Math.floor(currentWord.length * 1.5) + 1;
     guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
     insertBlanks();
 }
 function finalScreen(){
-    console.log('Done!');
+    titleBox = document.querySelector('.title-box');
+    titleBox.style.marginBottom = "0";
+    titleText = document.querySelector('#title-text');
+    titleText.textContent = 'Happy Birthday, Reagan ♡';
+    guessBox.style.marginTop = "0";
+    guessBox.innerHTML = "<b> Whenever I need project inspiration, you've always given me the<br> fantastic advice \
+     that I should just make hangman. <br> So, I figured since it's your birthday, I should finally get around to<br> making it.\
+     Happy 17th Reagan, I hope you had a wonderful birthday <br> and enjoyed your little game. I look forward to the next year of knowing you.";  
+    innerWords = document.querySelector('b');
+    innerWords.style.color = "#B8D8D8";
+    innerWords.style.textAlign = "center"
+    innerWords.style.border = "0";
+
+    for(let i=0; i<keys.length; i++){
+        keys[i].onclick = null;
+    }
 }
