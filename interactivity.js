@@ -61,6 +61,9 @@ function typeKey(letter){
         if(guessCount === 0){
             failedWord()
         }
+        if(guessCount <= 12){
+            displayHint();
+        }
     }
 }
 
@@ -91,7 +94,40 @@ function insertBlanks(){
     guessBox.innerHTML = basicString;
 }
 
+function displayHint(){
+    let hintText;
+    switch(currentWord){
+        case 'солнышко':
+            hintText = "HINT: Russian endearing name, think of sunshine";
+            break;
+        case 'любовь':
+            hintText = "HINT: Talkin' bout love, baby!";
+            break;
+        case 'милашка':
+            hintText = "HINT: Nickname, something you might call a cat, or you if I'm feeling frisky";
+            break;
+        case 'уют':
+            hintText = "HINT: Think relaxing by the fireplace, I have a bracelet with this very word on it";
+            break;
+        case 'игра':
+            hintText = "HINT: What are you playing right now? Hangman, yes, but what's hangman?"
+            break;
+        case 'кошка':
+            hintText = "HINT: My favorite one of these is fat, hairless, Korean, and named Jadu"
+            break;
+    }
+    titleBox = document.querySelector('.title-box');
+    hintP = document.createElement('p');
+    hintP.textContent = hintText;
+    hintP.style.cssText = "color: #B8D8D8; font-size: large; margin-top: 0;";
+    hintP.classList.add("hint");
+    titleBox.appendChild(hintP);
+}
+
 function finishWord(){
+    titleBox = document.querySelector('.title-box');
+    hint = document.querySelector('.hint');
+    titleBox.removeChild(hint);
     guessBox.innerHTML = "<b> Congrats! Move on to the next word?</b>";
     innerWords = document.querySelector('b');
     innerWords.style.color = "#B8D8D8";
@@ -122,6 +158,7 @@ function nextWord(current){
             finalScreen();
     }
 }
+
 function moveOn(){
     lettersFound = 0;
     guessCount = Math.floor(currentWord.length * 1.5) + 1;
