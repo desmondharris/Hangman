@@ -36,6 +36,7 @@ function getKey(letter){
     }
 }
 
+//Maybe add hint functionality?
 function typeKey(letter){
     // All the <b> tags that contain blank letters
     let blanks = document.querySelectorAll('b');
@@ -57,6 +58,9 @@ function typeKey(letter){
     } else{
         guessCount--;
         guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
+        if(guessCount === 0){
+            failedWord()
+        }
     }
 }
 
@@ -71,6 +75,13 @@ function findOccurences(letter, str){
     return indices
 }
 
+function failedWord(){
+    guessBox.innerHTML = `<b> Rats! The word was ${currentWord}. Move on to next word?</b>`;
+    innerWords = document.querySelector('b');
+    innerWords.style.color = "#B8D8D8";
+    innerWords.style.border = "0";
+    guessBox.appendChild(nextButton);
+}
 // Insert correct number of blank lines into guess flexbox
 function insertBlanks(){
     basicString = "";
@@ -94,17 +105,30 @@ function nextWord(current){
             currentWord = 'любовь';
             break;
         case 'любовь':
-            finalScreen();
+            currentWord = 'милашка';;
             break;
+        case 'милашка':
+            guessCount = 10;
+            currentWord = 'уют';;
+            break;
+        case 'уют':
+            guessCount = 10;
+            currentWord = 'игра';;
+            break;
+        case 'игра':
+            currentWord = 'кошка';
+            break;
+        case 'кошка':
+            finalScreen();
     }
 }
 function moveOn(){
     lettersFound = 0;
+    guessCount = Math.floor(currentWord.length * 1.5) + 1;
     addKeyFctns();
     nextWord(currentWord);
-    insertBlanks();
-    guessCount = Math.floor(currentWord.length * 1.5) + 1;
     guessCntTxt.textContent = `Guesses Remaining: ${guessCount}`;
+    insertBlanks();
 }
 function finalScreen(){
     console.log('Done!');
