@@ -134,7 +134,11 @@ function finishWord(){
         hint = document.querySelector('.hint');
         titleBox.removeChild(hint);
     }
-    guessBox.innerHTML = "<b> Congrats! Move on to the next word?</b>";
+    if(currentWord === 'кошка'){
+        guessBox.innerHTML = "<b> That's the last one! Ready to finish the game?</b>"; 
+    } else{
+        guessBox.innerHTML = "<b> Congrats! Move on to the next word?</b>";
+    }
     innerWords = document.querySelector('b');
     innerWords.style.color = "#B8D8D8";
     innerWords.style.border = "0";
