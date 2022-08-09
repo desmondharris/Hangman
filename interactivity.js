@@ -104,13 +104,13 @@ function displayHint(){
             hintText = "HINT: Russian endearing name, think of sunshine";
             break;
         case 'любовь':
-            hintText = "HINT: Talkin' bout love, baby!";
+            hintText = "HINT: Think about love";
             break;
         case 'милашка':
-            hintText = "HINT: Nickname, something you might call a cat, or you if I'm feeling frisky";
+            hintText = "HINT: Nickname, something you might call a cat";
             break;
         case 'уют':
-            hintText = "HINT: Think relaxing by the fireplace, I have a bracelet with this very word on it";
+            hintText = "HINT: Think relaxing by the fireplace, I have a bracelet with this word on it";
             break;
         case 'игра':
             hintText = "HINT: What are you playing right now? Hangman, yes, but what's hangman?"
