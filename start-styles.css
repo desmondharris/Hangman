@@ -9,9 +9,6 @@ body{
 p{
     color: #B8D8D8;
 }
-.title-box{
-    display: flex;
-}
 #title-text{
     font-weight: bolder;
     font-size: 6em;
