@@ -190,7 +190,7 @@ function finalScreen(){
     titleText.textContent = 'Happy Birthday, Reagan ♡';
     guessBox.style.marginTop = "0";
     guessBox.innerHTML = "<b> Whenever I need project inspiration, you've always given me the<br> fantastic advice \
-     that I should just make hangman. <br> So, I figured since it's your birthday, I should finally get around to<br> making it.\
+     that I should 'just make hangman'. <br> So, I figured since it's your birthday, I should finally get around to<br> making it.\
      Happy 17th Reagan, I hope you had a wonderful birthday <br> and enjoyed your little game. I look forward to the next year of knowing you.";  
     innerWords = document.querySelector('b');
     innerWords.style.color = "#B8D8D8";
