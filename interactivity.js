@@ -122,7 +122,7 @@ function displayHint(){
     titleBox = document.querySelector('.title-box');
     hintP = document.createElement('p');
     hintP.textContent = hintText;
-    hintP.style.cssText = "color: #B8D8D8; font-size: large; margin-top: 0;";
+    hintP.style.cssText = "color: #B8D8D8; font-size: large; margin-top: 0; text-align: center;";
     hintP.classList.add("hint");
     titleBox.appendChild(hintP);
     hinted = true;
