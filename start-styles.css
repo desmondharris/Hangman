@@ -50,8 +50,8 @@ b{
 
     text-align: center;
     font-size: 3em;
-    width: 3vw;
-    height: 3vw;
+    width: 1.5em;
+    aspect-ratio: 1/1;
     margin: .25em .25em .25em .25em;
     background-color: black;
     color: #B8D8D8;
